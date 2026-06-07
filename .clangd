@@ -2,4 +2,3 @@ CompileFlags:
   Add:
     - "-Isrc/cli"
     - "-Isrc/lang"
-    - "-std=c++23"

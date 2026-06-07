@@ -1,10 +1,8 @@
 #pragma once
 
-enum rv_cli_terminal_type {
+#include "rv_common.h"
 
-};
-
-enum rv_cli_flags : unsigned long long {
+typedef enum rv_cli_flags : rv_u64 {
   RV_CLI_HAS_NONE = 0ull,
 
   RV_CLI_HAS_VT_ESCAPE = 1ull << 0,
@@ -32,11 +30,10 @@ enum rv_cli_flags : unsigned long long {
 
   RV_CLI_IS_MULTIPLEXED = 1ull << 19,
   RV_CLI_IS_REMOTE = 1ull << 20,
-};
+} rv_cli_flags;
 
-bool rv_cli_init(int argc, char* argv[]);
-bool rv_cli_update();
+rv_bool rv_cli_init(int argc, char* argv[]);
+rv_bool rv_cli_update();
 void rv_cli_destroy();
 
 rv_cli_flags rv_cli_get_flags();
-bool rv_cli_has_flag(rv_cli_flags flag);

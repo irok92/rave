@@ -1,0 +1,12 @@
+// Project-local debug tasks
+//
+// For more documentation on how to configure debug tasks,
+// see: https://zed.dev/docs/debugger
+[
+	{
+		"label": "Debug rave-cli",
+		"program": "$ZED_WORKTREE_ROOT/rave-cli.exe",
+		"request": "launch",
+		"adapter": "CodeLLDB",
+	},
+]
