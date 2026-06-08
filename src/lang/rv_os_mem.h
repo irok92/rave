@@ -3,6 +3,8 @@
 
 #include "rv_common.h"
 
+#include <string.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -17,6 +19,17 @@ extern "C" {
 #define rv_os_memcpy(dest, src, count) memcpy(dest, src, count)
 #define rv_os_memmove(dest, src, count) memmove(dest, src, count)
 
+
+#define rv_os_aligned_alloc(alignment, size) rv_os_mem.aligned_alloc(alignment, size)
+#define rv_os_aligned_free(ptr) rv_os_mem.aligned_free(ptr)
+#define rv_os_reserve(size) rv_os_mem.reserve(size)
+#define rv_os_reserve_large(size) rv_os_mem.reserve_large(size)
+#define rv_os_commit(ptr, size) rv_os_mem.commit(ptr, size)
+#define rv_os_commit_large(ptr, size) rv_os_mem.commit_large(ptr, size)
+#define rv_os_decommit(ptr, size) rv_os_mem.decommit(ptr, size)
+#define rv_os_release(ptr, size) rv_os_mem.release(ptr, size)
+
+
 // Regular allocations functions
 typedef void *(*rv_os_fn_malloc)(rv_usize count);
 typedef void *(*rv_os_fn_calloc)(rv_usize num, rv_usize size);
@@ -30,10 +43,8 @@ typedef void (*rv_os_fn_aligned_free)(void *ptr);
 // memory mapped api functions.
 typedef void* (*rv_os_fn_reserve)(rv_u64 size);
 typedef void* (*rv_os_fn_reserve_large)(rv_u64 size);
-
 typedef rv_bool (*rv_os_fn_commit)(void* ptr, rv_u64 size);
 typedef rv_bool (*rv_os_fn_commit_large)(void* ptr, rv_u64 size);
-
 typedef void (*rv_os_fn_decommit)(void* ptr, rv_u64 size);
 typedef void (*rv_os_fn_release)(void* ptr, rv_u64 size);
 

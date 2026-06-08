@@ -1,6 +1,5 @@
 #include "rv_cli.h"
 
-
 int main(int argc, char* argv[]) {
 
     if(!rv_cli_init(argc, argv)) {

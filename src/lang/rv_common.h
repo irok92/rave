@@ -9,8 +9,59 @@
 #define RV_OPT(...)
 #endif
 
+#define RV_ASSERT(x)				  assert(x)
+#define RV_STATIC_ASSERT(cond, str) static_assert(cond, str)
+
+#define RV_SIZEOF(x)	(sizeof(x))
+#define RV_COUNTOF(x)   (sizeof(x) / sizeof(x[0]))
+
+#if defined(_MSC_VER)
+	#if defined(__SANITIZE_ADDRESS__)
+		#define RV_ASAN_ENABLED 1
+		#define RV_NO_ASAN		 __declspec(no_sanitize_address)
+	#else
+		#define RV_NO_ASAN
+	#endif
+#elif defined(__clang__)
+	#if defined(__has_feature)
+		#if __has_feature(address_sanitizer) || defined(__SANITIZE_ADDRESS__)
+			#define RV_ASAN_ENABLED 1
+		#endif
+	#endif
+	#define RV_NO_ASAN __attribute__((no_sanitize("address")))
+#else
+	#define RV_NO_ASAN
+#endif
+
+#if RV_ASAN_ENABLED
+C_LINKAGE void
+__asan_poison_memory_region(
+	void const volatile* addr,
+	size_t				 size
+);
+C_LINKAGE void
+__asan_unpoison_memory_region(
+	void const volatile* addr,
+	size_t				 size
+);
+	#define RV_ASAN_POISON_MEM(addr, size)	__asan_poison_memory_region((addr), (size))
+	#define RV_ASAN_UNPOISON_MEM(addr, size) __asan_unpoison_memory_region((addr), (size))
+#else
+	#define RV_ASAN_POISON_MEM(addr, size)	((void)(addr), (void)(size))
+	#define RV_ASAN_UNPOISON_MEM(addr, size) ((void)(addr), (void)(size))
+#endif
+
+#ifndef RV_HAS_BUILTIN
+	#ifdef __has_builtin
+		#define RV_HAS_BUILTIN(x) __has_builtin(x)
+	#else
+		#define RV_HAS_BUILTIN(x) 0
+	#endif
+#endif
+
 #include <stdint.h>
 #include <stdbool.h>
+#include <assert.h>
 
 
 typedef int8_t rv_s8;
@@ -35,5 +86,7 @@ typedef bool rv_bool;
 #else
 #define RV_NULL NULL
 #endif
+
+#define RV_MAX(a, b) (((a) > (b)) ? (a) : (b))
 
 #endif // RV_COMMON_H
