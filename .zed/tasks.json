@@ -1,0 +1,24 @@
+[
+	{
+		"label": "raddbg",
+		"command": "./raddebugger/build/raddbg.exe",
+		"args": [
+			"--project:./rave.radpj",
+			"--user:./rave.radusr",
+			"--auto_run",
+			"--quit_after_success",
+		],
+		"env": {},
+		//"cwd": "/path/to/working/directory",
+		"use_new_terminal": false,
+		"allow_concurrent_runs": false,
+
+		"reveal": "never",
+		"reveal_target": "dock",
+		"hide": "never",
+		"shell": "system",
+		"show_summary": true,
+		"show_command": false,
+		"save": "none",
+	},
+]
