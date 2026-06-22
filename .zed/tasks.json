@@ -1,7 +1,7 @@
 [
 	{
 		"label": "raddbg",
-		"command": "./raddebugger/build/raddbg.exe",
+		"command": "raddbg",
 		"args": [
 			"--project:./rave.radpj",
 			"--user:./rave.radusr",

@@ -1,9 +1,0 @@
-// raddbg 0.9.27 project file
-
-target:
-{
-  executable: "rave-tests.exe"
-  working_directory: ""
-  enabled: 1
-  debug_subprocesses: 1
-}
