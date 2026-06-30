@@ -56,6 +56,7 @@ compile_commands.json
 *.log
 *.bak
 *.swp
+rave_log-*.txt
 
 # vcpkg
 vcpkg_installed/
@@ -71,3 +72,8 @@ raddebugger/
 *.rdi
 
 .build/
+
+docs/
+
+plugins/rave-vscode/node_modules/
+plugins/rave-zed/target/

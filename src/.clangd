@@ -1,6 +1,7 @@
 CompileFlags:
   Add:
-    - "-Icli"
-    - "-Ilang"
+    - "-std=c++23" 
+    - "-I./"
     - "-Itests/lib"
+    - "-Imimalloc/include"
     - "-IC:\\tools\\llvm\\include\\"

@@ -1,0 +1,5 @@
+
+name = "Rave"
+grammar = "rave"
+path_suffixes = ["rave"]
+line_comments = ["# "]

@@ -1,0 +1,15 @@
+id = "rave-lang"
+name = "Rave Language"
+version = "0.0.1"
+schema_version = 1
+authors = ["Mindrage <@irok92>"]
+description = "The Language Plugin for Rave, a fullstack programming language"
+repository = "https://github.com/irok92/rave"
+
+[language_servers.rave-lsp]
+name = "rave-lsp"
+language = "Rave"
+
+[grammars.rave]
+repository = "file://C:/Projects/rave-project/rave/plugins/rave-treesitter/"
+rev = ""

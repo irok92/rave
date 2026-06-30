@@ -1,0 +1,49 @@
+{
+  "name": "rave-vscode",
+  "displayName": "Rave Language Support",
+  "description": "Syntax highlighting and IntelliSense for the Rave programming language",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "activationEvents": [
+    "onLanguage:rave"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "languages": [{
+      "id": "rave",
+      "aliases": ["Rave", "rave"],
+      "extensions": [".rave"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "rave",
+      "scopeName": "main.rave",
+      "path": "./syntaxes/rave.tmLanguage.json"
+    }],
+    "configuration": {
+      "title": "Rave",
+      "properties": {
+        "rave.server.path": {
+          "type": "string",
+          "default": "rave.exe",
+          "description": "Path to the rave LSP server executable"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "rave.restartLanguageServer",
+        "title": "Restart Language Server"
+      }
+    ]
+  },
+  "extensionDependencies": [],
+  "dependencies": {
+    "vscode-languageclient": "^10.0.0"
+  }
+}

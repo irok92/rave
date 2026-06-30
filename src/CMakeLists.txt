@@ -8,8 +8,6 @@ project(
 	LANGUAGES C CXX
 )
 
-add_subdirectory(mimalloc)
-
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -25,6 +23,9 @@ foreach(config IN ITEMS Debug Release RelWithDebInfo MinSizeRel)
 	set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${config_upper} ${CMAKE_BINARY_DIR}/bin)
 endforeach()
 
+set(MI_OVERRIDE OFF)
+
+add_subdirectory(mimalloc)
 
 find_package(LLVM CONFIG REQUIRED)
 find_program(LLVM_CONFIG_EXECUTABLE llvm-config REQUIRED)
@@ -51,7 +52,7 @@ separate_arguments(LLVM_LIB_FILES)
 message(STATUS "LLVM Lib Files: ${LLVM_LIB_FILES}")
 
 
-file(GLOB_RECURSE RAVE_SOURCES CONFIGURE_DEPENDS ./*.cpp ./language/*.hpp)
+file(GLOB_RECURSE RAVE_SOURCES CONFIGURE_DEPENDS ./rave/*.cpp ./rave_llvm/*.cpp rave_server/*.cpp rave_server/*.c)
 add_executable(rave ${RAVE_SOURCES})
 target_include_directories(rave PRIVATE ./ ${LLVM_INCLUDE_DIRS})
 target_link_directories(rave PRIVATE .deps/libs)
